@@ -10,22 +10,22 @@ public class StageGenerator : MonoBehaviour
     public Transform character;
     public GameObject[] stageChips;
     public int startChipIndex;
-    public int perInstantiate;
+    public int preInstantiate;
     public List<GameObject> generatedStageList=new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
     {
         currentChipIndex=startChipIndex -1;
-        UpdateStage(perInstantiate);
+        UpdateStage(preInstantiate);
     }
 
     // Update is called once per frame
     void Update()
     {
         int charaPositionIndex=(int)(character.position.z/StageChipSize);
-        if(charaPositionIndex + perInstantiate > currentChipIndex){
-            UpdateStage(charaPositionIndex+perInstantiate);
+        if(charaPositionIndex + preInstantiate > currentChipIndex){
+            UpdateStage(charaPositionIndex+preInstantiate);
         }
     }
 
@@ -37,13 +37,13 @@ public class StageGenerator : MonoBehaviour
             generatedStageList.Add(stageObject);
             
         }
-        while(generatedStageList.Count>perInstantiate+2)DestroyOldestStage();
+        while(generatedStageList.Count>preInstantiate+2)DestroyOldestStage();
         currentChipIndex=toChipIndex;
     }
 
     GameObject GenerateStage(int chipIndex){
         int nextStageChip=Random.Range(0,stageChips.Length);
-        GameObject stageObject=(GameObject)Instantiate(
+        GameObject stageObject=(GameObject)Instantiate(//ダウンキャストする必要はない
             stageChips[nextStageChip],
             new Vector3(0, 0, chipIndex*StageChipSize),
             Quaternion.identity
