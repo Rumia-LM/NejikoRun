@@ -282,7 +282,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gravity: 20
   speedZ: 5
+  speedX: 3
   speedJump: 8
+  accelerationZ: 5
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
