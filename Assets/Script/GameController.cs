@@ -18,6 +18,11 @@ public class GameController : MonoBehaviour
 
         if(nejiko.Life()<=0){
             enabled=false;
+
+            if(PlayerPrefs.GetInt("HighScore")<score){
+                PlayerPrefs.SetInt("HighScore",score);
+            }
+
             Invoke("ReturnToTitle",2.0f);
         }
     }
